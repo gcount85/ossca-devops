@@ -1,4 +1,4 @@
-# test pull request actions
+# test deploy actions
 
 def function():
     print("hi")
