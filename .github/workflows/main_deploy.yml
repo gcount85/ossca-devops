@@ -54,6 +54,9 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
+        - name: Check current directory
+          run: pwd
+
         - name: 'Login via Azure CLI'
           uses: azure/login@v1
           with:
