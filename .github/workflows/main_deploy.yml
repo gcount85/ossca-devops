@@ -76,7 +76,7 @@ jobs:
           with:
             namespace: 'default'
             manifests: |
-              azure-vote-all-in-one-redis.yaml
+              ossca-devops.yaml
             images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/ossca-devops-app:${{ github.sha }}
             pull-images: false 
 
