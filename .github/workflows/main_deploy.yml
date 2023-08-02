@@ -63,11 +63,6 @@ jobs:
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        - name: Check current directory
-          run: pwd
-        - name: List files in current directory
-          run: ls -a
-
         - name: Set AKS context
           id: set-context
           uses: azure/aks-set-context@v3
@@ -75,19 +70,9 @@ jobs:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
             cluster-name: ${{ secrets.CLUSTER_NAME }}
 
-        - name: Check current directory
-          run: pwd
-        - name: List files in current directory
-          run: ls -a
-
         - name: Setup kubectl
           id: install-kubectl
           uses: azure/setup-kubectl@v3
-
-        - name: Check current directory
-          run: pwd
-        - name: List files in current directory
-          run: ls -a
         
         - name: Deploy to AKS
           id: deploy-aks
