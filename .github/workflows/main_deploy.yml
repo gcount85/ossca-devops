@@ -70,8 +70,8 @@ jobs:
           id: install-kubectl
           uses: azure/setup-kubectl@v3
 
-        - name: Check current directory
-          run: pwd
+        # - name: Check current directory
+        #   run: pwd
 
         - name: List files in current directory
           run: ls
