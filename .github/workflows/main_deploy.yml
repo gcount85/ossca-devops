@@ -73,6 +73,9 @@ jobs:
         - name: Check current directory
           run: pwd
 
+        - name: List files in current directory
+          run: ls
+        
         - name: Deploy to AKS
           id: deploy-aks
           uses: Azure/k8s-deploy@v4
