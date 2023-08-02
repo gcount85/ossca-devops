@@ -74,7 +74,7 @@ jobs:
         #   run: pwd
 
         - name: List files in current directory
-          run: ls
+          run: ls -a
         
         - name: Deploy to AKS
           id: deploy-aks
@@ -82,7 +82,7 @@ jobs:
           with:
             namespace: 'default'
             manifests: |
-              ./ossca-devops.yml
+              ossca-devops.yaml
             images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/ossca-devops-app:${{ github.sha }}
             pull-images: false 
 
