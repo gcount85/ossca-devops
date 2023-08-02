@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ossca-devops-app
+  name: flaskapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ossca-devops-app
+      app: flaskapp
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,13 +15,13 @@ spec:
   template:
     metadata:
       labels:
-        app: ossca-devops-app
+        app: flaskapp
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
       containers:
-      - name: ossca-devops-app
-        image: osscadevopsimages.azurecr.io/ossca-devops-app:latest
+      - name: flaskapp
+        image: osscadevopsimages.azurecr.io/flaskapp:latest
         ports:
         - containerPort: 80
         resources:
@@ -33,10 +33,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ossca-devops-app
+  name: flaskapp
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: ossca-devops-app
+    app: flaskapp
