@@ -13,12 +13,22 @@ jobs:
         # checkout the repo
         - name: 'Checkout GitHub Action'
           uses: actions/checkout@main
-          
+
+        - name: Check current directory
+          run: pwd
+        - name: List files in current directory
+          run: ls -a
+
         - name: 'Login via Azure CLI'
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
+
+        - name: Check current directory
+          run: pwd
+        - name: List files in current directory
+          run: ls -a
+
         - name: 'Build and push image'
           uses: azure/docker-login@v1
           with:
@@ -28,6 +38,12 @@ jobs:
         - run: |
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/flaskapp:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/flaskapp:${{ github.sha }}
+
+        - name: Check current directory
+          run: pwd
+        - name: List files in current directory
+          run: ls -a
+
 
     # deploy:
     #     needs: build
@@ -59,6 +75,11 @@ jobs:
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+        - name: Check current directory
+          run: pwd
+        - name: List files in current directory
+          run: ls -a
+
         - name: Set AKS context
           id: set-context
           uses: azure/aks-set-context@v3
@@ -66,13 +87,17 @@ jobs:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
             cluster-name: ${{ secrets.CLUSTER_NAME }}
 
+        - name: Check current directory
+          run: pwd
+        - name: List files in current directory
+          run: ls -a
+
         - name: Setup kubectl
           id: install-kubectl
           uses: azure/setup-kubectl@v3
 
-        # - name: Check current directory
-        #   run: pwd
-
+        - name: Check current directory
+          run: pwd
         - name: List files in current directory
           run: ls -a
         
