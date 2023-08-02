@@ -76,7 +76,7 @@ jobs:
           with:
             namespace: 'default'
             manifests: |
-              ossca-devops.yaml
+              ossca-devops/ossca-devops.yaml
             images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/ossca-devops-app:${{ github.sha }}
             pull-images: false 
 
