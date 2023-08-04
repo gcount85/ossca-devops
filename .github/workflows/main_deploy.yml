@@ -1,4 +1,4 @@
-name: flask app deployment to ACI
+name: flask app deployment to ACI & AKS
 
 on:
     push:
@@ -13,12 +13,12 @@ jobs:
         # checkout the repo
         - name: 'Checkout GitHub Action'
           uses: actions/checkout@main
-          
+
         - name: 'Login via Azure CLI'
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
+
         - name: 'Build and push image'
           uses: azure/docker-login@v1
           with:
@@ -50,3 +50,37 @@ jobs:
     #         name: aci-flaskapp
     #         location: 'korea central'
             
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+        # checkout the repo
+        - name: 'Checkout GitHub Action'
+          uses: actions/checkout@main
+
+        - name: 'Login via Azure CLI'
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        - name: Set AKS context
+          id: set-context
+          uses: azure/aks-set-context@v3
+          with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            cluster-name: ${{ secrets.CLUSTER_NAME }}
+
+        - name: Setup kubectl
+          id: install-kubectl
+          uses: azure/setup-kubectl@v3
+        
+        - name: Deploy to AKS
+          id: deploy-aks
+          uses: Azure/k8s-deploy@v4
+          with:
+            namespace: 'default'
+            manifests: |
+              ossca-devops.yaml
+            images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flaskapp:${{ github.sha }}
+            pull-images: false 
+
