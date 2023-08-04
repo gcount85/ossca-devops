@@ -23,7 +23,7 @@ spec:
       - name: flaskapp
         image: osscadevopsimages.azurecr.io/flaskapp:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 80
           name: flask-app
         resources:
           requests:
