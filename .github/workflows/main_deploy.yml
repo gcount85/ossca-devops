@@ -49,7 +49,6 @@ jobs:
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: aci-flaskapp
             location: 'korea central'
-            ports: 5000
             
     deploy-to-AKS:
         needs: build

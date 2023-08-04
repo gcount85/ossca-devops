@@ -18,5 +18,8 @@ RUN python3 -m pip install --upgrade pip \
 # Test with pytest
 # RUN python3 -m pytest tests
 
+# 포트 지정
+EXPOSE 5000
+
 # start app.py
 CMD ["python3", "./src/app.py"]
