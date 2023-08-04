@@ -23,7 +23,7 @@ spec:
       - name: flaskapp
         image: osscadevopsimages.azurecr.io/flaskapp:latest
         ports:
-        - containerPort: 80
+        - containerPort: 5000
         resources:
           requests:
             cpu: 250m
@@ -38,6 +38,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    # targetPort: 5000
+    targetPort: 5000
   selector:
     app: flaskapp
