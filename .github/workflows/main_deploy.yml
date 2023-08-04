@@ -29,7 +29,7 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/flaskapp:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/flaskapp:${{ github.sha }}
 
-    deploy:
+    deploy-to-ACI:
         needs: build
         runs-on: ubuntu-latest
         steps:
@@ -50,7 +50,7 @@ jobs:
             name: aci-flaskapp
             location: 'korea central'
             
-    deploy:
+    deploy-to-AKS:
         needs: build
         runs-on: ubuntu-latest
         steps:
